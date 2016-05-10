@@ -1,0 +1,33 @@
+<div class="container">
+
+    <section class="app-body">
+        <section class="archive-control">
+            <span>Осталось {{ vm.remaining() }} задач из {{ vm.todos.length }}</span>
+            <p>[ <a href="" ng-click="vm.archive()">Удалить завершенные</a> ]
+            </p>
+        </section>
+
+        <ul class="unstyled">
+            <li data-ng-repeat="todo in vm.todos track by $index">
+                <input type="checkbox" ng-model="vm.todo.done">
+                <span ng-if="!todo.isEdit" class="done-{{ todo.done }}"
+                      ng-click="vm.editTask($index)">{{ todo.text }}</span>
+
+                <div ng-if="todo.isEdit">
+                    <input type="text" ng-model="vm.editable"/>
+                    <button class="btn btn-success"
+                            ng-click="vm.saveTask($index)">Изменить
+                    </button>
+                </div>
+
+            </li>
+        </ul>
+
+        <form ng-submit="vm.addTodo()" class="todo-form">
+            <input type="text" ng-model="vm.todoText"
+                   placeholder="Введите новую задачу"/>
+            <br/>
+            <input type="submit" value="Добавить задачу"/>
+        </form>
+    </section>
+</div>
